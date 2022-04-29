@@ -1,0 +1,172 @@
+﻿<Window x:Class="ClassroomTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassroomTimer"
+        mc:Ignorable="d"
+        Title="PG 2 Classroom Timer" Height="400" Width="800" Background="#FF0B202C" WindowStyle="ToolWindow"
+        Icon="alarm-icon-jelly-bean.ico"
+        Loaded="Window_Loaded">
+    <Grid>
+
+        <Border Opacity="0.5">
+            <Border.Background>
+                <DrawingBrush Stretch="None" TileMode="Tile" Viewport="0,0,4,4" ViewportUnits="Absolute">
+
+                    <!-- a drawing of 4 checkerboard tiles -->
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+
+                            <!-- checkerboard background -->
+                            <GeometryDrawing Brush="#FF03070A">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0,0,4,4" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+
+                            <!-- two checkerboard foreground tiles -->
+                            <GeometryDrawing Brush="#FF004A74">
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="0,0,2,2" />
+                                        <RectangleGeometry Rect="2,2,2,2" />
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Border.Background>
+        </Border>
+
+        <DockPanel>
+            <!--<DockPanel.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                    <GradientStop Offset="0" Color="#aa0B202C" />
+                    <GradientStop Offset="0.4" Color="#FF0B202C" />
+                </LinearGradientBrush>
+            </DockPanel.Background>-->
+            <UniformGrid Rows="1" DockPanel.Dock="Top">
+                <StackPanel>
+                    <ToggleButton x:Name="startTimeBtn" Style="{StaticResource DefaultToggleButton}" Margin="5" Click="startTimeBtn_Click" IsChecked="True">
+                        <TextBlock Text="START">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </ToggleButton>
+                    <Canvas x:Name="startCanvas" HorizontalAlignment="Center" Visibility="Visible">
+                        <StackPanel Orientation="Horizontal" Canvas.Left="-75" Canvas.Top="-15">
+                            <ToggleButton x:Name="AM" Style="{StaticResource DefaultToggleButton}" FontSize="28" Margin="5,0" Click="startTimeBtn_Click" IsChecked="True">
+                                <TextBlock Text="9AM">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </ToggleButton>
+                            <ToggleButton x:Name="PM" Style="{StaticResource DefaultToggleButton}" FontSize="28" Margin="5,0" Click="startTimeBtn_Click">
+                                <TextBlock Text="1PM">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </ToggleButton>
+                        </StackPanel>
+                    </Canvas>
+                </StackPanel>
+                <StackPanel>
+                    <ToggleButton x:Name="breakTimeBtn" Style="{StaticResource DefaultToggleButton}" Margin="5" Click="breakTimeBtn_Click">
+                        <TextBlock Text="BREAK">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </ToggleButton>
+                    <Canvas x:Name="breakCanvas" HorizontalAlignment="Center" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" Canvas.Left="-150" Canvas.Top="-15">
+                            <ToggleButton x:Name="Five" Style="{StaticResource DefaultToggleButton}" FontSize="28" Margin="5,0" Click="breakTimeBtn_Click" Tag="5">
+                                <TextBlock Text="5MIN">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </ToggleButton>
+                            <ToggleButton x:Name="Ten" Style="{StaticResource DefaultToggleButton}" FontSize="28" Margin="5,0" Click="breakTimeBtn_Click" Tag="10">
+                                <TextBlock Text="10MIN">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </ToggleButton>
+                            <ToggleButton x:Name="Fifteen" Style="{StaticResource DefaultToggleButton}" FontSize="28" Margin="5,0" Click="breakTimeBtn_Click" Tag="15" IsChecked="True">
+                                <TextBlock Text="15MIN">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </ToggleButton>
+                        </StackPanel>
+                    </Canvas>
+                </StackPanel>
+                <ToggleButton x:Name="quizTimeBtn" Style="{StaticResource DefaultToggleButton}" Margin="5" Click="QuizTimeBtn_Click">
+                    <TextBlock Text="QUIZ">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </ToggleButton>
+                <ToggleButton x:Name="testTimeBtn" Style="{StaticResource DefaultToggleButton}" Margin="5" Click="TestTimeBtn_Click">
+                    <TextBlock Text="TEST">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </ToggleButton>
+            </UniformGrid>
+
+            <TextBlock x:Name="TodaysDateTime" Text="OCTOBER 24, 2018" Margin="0,20,5,0" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Foreground="#FF7BCFFF" FontFamily="alarm clock" FontSize="24" >
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <Grid Margin="0,15,0,0">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+                        <TextBlock x:Name="DayTime" Text="FRI" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                           Foreground="#FF7BCFFF" FontFamily="alarm clock" FontSize="50" Margin="0,10,5,13">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="ClockTime" Text="09:00" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#fff" FontFamily="alarm clock" FontSize="100">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock x:Name="ClockTimeAMPM" Text="AM" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                           Foreground="#FF7BCFFF" FontFamily="alarm clock" FontSize="50" Margin="0,0,0,13">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock x:Name="RemainingTime" Text="00:12:32.49" Margin="0,-15,5,0" HorizontalAlignment="Right" Foreground="#FF00A2FF" FontFamily="alarm clock" FontSize="72" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="25" ShadowDepth="0" Color="#FF65DCFF" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+
+                <Grid HorizontalAlignment="Left" Margin="10,0,0,0">
+                    <local:TimerCtrl x:Name="hourTimer" Width="200" Height="200" HorizontalAlignment="Center" />
+                    <local:TimerCtrl x:Name="minuteTimer" Width="150" Height="150" HorizontalAlignment="Center" />
+                    <local:TimerCtrl x:Name="secondTimer" Width="100" Height="100" HorizontalAlignment="Center" />
+                    <local:TimerCtrl x:Name="msTimer" Width="50" Height="50" HorizontalAlignment="Center" />
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>
